@@ -10,10 +10,10 @@ int main()
     scanf("%d", &base_b);
 
     printf("Enter a number in base %d: \n", base_a);
-    scanf("%d", &num);
+    scanf("%x", &num);
 
     // Print the number the user typed
-    printf("Your number in base %d is: %d \n", base_a, num);
+    printf("Your number in base %d is: %x \n", base_b, num);
 
     return 0;
 }
