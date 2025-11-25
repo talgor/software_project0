@@ -5,7 +5,7 @@ int convertToDecimal(int);
 void toBase(int, int);
 
 int main() {
-    int base_a, base_b;
+    int base_a, base_b, decimal;
     printf("Enter the source base: \n");
     
     if (scanf("%d", &base_a) != 1) {
@@ -34,8 +34,7 @@ int main() {
     
     while (getchar() != '\n');
     
-
-    int decimal = convertToDecimal(base_a);
+    decimal = convertToDecimal(base_a);
 
     printf("Your number in base %d is: ", base_b);
     toBase(decimal, base_b);
