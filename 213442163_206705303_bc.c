@@ -1,26 +1,45 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int convertToDecimal(int);
+void toBase(int, int);
 
 int main() {
-    int base;
+    int base_a, base_b;
     printf("Enter the source base: \n");
     
-    if (scanf("%d", &base) != 1) {
+    if (scanf("%d", &base_a) != 1) {
         printf("Error: Invalid source base!\n");
         return 1;
     }
 
-    // 3. Validate the input range
-    if (base < 2 || base > 16) {
+    if (base_a < 2 || base_a > 16) {
         printf("Error: Invalid source base!\n");
         return 1;
     }
     
     while (getchar() != '\n');
 
-    int decimal = convertToDecimal(base);
+    printf("Enter the target base: \n");
     
+    if (scanf("%d", &base_b) != 1) {
+        printf("Error: Invalid source base!\n");
+        return 1;
+    }
+
+    if (base_b < 2 || base_b > 16) {
+        printf("Error: Invalid source base!\n");
+        return 1;
+    }
+    
+    while (getchar() != '\n');
+    
+
+    int decimal = convertToDecimal(base_a);
+
+    printf("Your number in base %d is: ", base_b);
+    toBase(decimal, base_b);
+    printf ("\n");
 
     return 0;
 }
@@ -54,4 +73,21 @@ int convertToDecimal(int base) {
     }
 
     return decimal;
+}
+
+void toBase(int num, int base)
+{
+    if (num){
+        unsigned int rem;
+        div_t result = div(num, base);
+        rem = result.rem;
+        toBase(result.quot, base);
+        if (rem <10){
+            putchar(rem+'0');
+        }
+        else{
+            putchar(rem+87);
+        }
+    }
+
 }
