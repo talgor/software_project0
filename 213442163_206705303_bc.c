@@ -1,19 +1,57 @@
 #include <stdio.h>
 
-int main()
-{
-    int num, base_a, base_b;
+int convertToDecimal(int);
+
+int main() {
+    int base;
     printf("Enter the source base: \n");
-    scanf("%d", &base_a);
+    
+    if (scanf("%d", &base) != 1) {
+        printf("Error: Invalid source base!\n");
+        return 1;
+    }
 
-    printf("Enter the target base: \n");
-    scanf("%d", &base_b);
+    // 3. Validate the input range
+    if (base < 2 || base > 16) {
+        printf("Error: Invalid source base!\n");
+        return 1;
+    }
+    
+    while (getchar() != '\n');
 
-    printf("Enter a number in base %d: \n", base_a);
-    scanf("%x", &num);
-
-    // Print the number the user typed
-    printf("Your number in base %d is: %x \n", base_b, num);
+    int decimal = convertToDecimal(base);
+    
 
     return 0;
+}
+
+int convertToDecimal(int base) {
+    int intDigit;
+    char charDigit;
+    int decimal = 0;
+    printf("Enter a number in base %d: \n", base);
+
+    while ((charDigit = getchar()) != '\n' && charDigit != EOF) {
+        if (charDigit >= '0' && charDigit <= '9') {
+            intDigit = charDigit - '0';
+        }
+        else if (charDigit >= 'a' && charDigit <= 'f') {
+            intDigit = charDigit - 'a' + 10;
+        }
+        else {
+            printf("\nError: Invalid input number");
+            while (getchar() != '\n');
+            return -1;
+        }
+
+        if (intDigit >= base) {
+            printf("\nError: Invalid input number");
+            while (getchar() != '\n');
+            return -1;
+        }
+
+        decimal = decimal * base + intDigit;
+    }
+
+    return decimal;
 }
